@@ -1,0 +1,90 @@
+mode_setup;
+design_size := 2.032;
+cap# := design_size*1mm#;
+
+font_size 10pt#;
+pen_scale := 7.6;
+pen_ratio := 1;
+pen_rot := 135;
+charwd_scale := 1;
+
+thin_weight := 2;                % factor to increase thin pen stroke
+penwd# := cap#/pen_scale;          % width of horizontal or vertical pen stroke
+penht# := penwd#;                  % ht = wd, at this stage anyway!
+thin# := (penwd#/6.5cosd(45))*thin_weight;   % pen stroke width at 135-deg
+thick# := (pen_ratio*6.25thin#)/thin_weight; % pen stroke width at 45-deg
+ht# := cap#;                       % character height at horizontal line
+wd# := charwd_scale*ht#;           % character width - nominal reference
+
+define_pixels(penwd,penht,wd);
+define_whole_pixels(ht);
+define_blacker_pixels(thin,thick);
+smoothing := 0;
+
+clear_pen_memory;
+
+pickup pencircle xscaled thick yscaled thin rotated (pen_rot);
+  main_pen := savepen;
+
+capsule_def (squarepen) makepen (unitsquare shifted (-.5,-.5)
+scaled thick rotated 135);
+
+capsule_def (penoffsquare) makepen (unitsquare shifted (0,-.5));
+
+pickup penoffsquare xscaled (.8thick) yscaled (1.4thin) rotated pen_rot;
+  mpen135 := savepen;
+
+pickup penoffsquare xscaled (.8thick) yscaled (1.4thin) rotated (pen_rot-180);
+  mpen315 := savepen;
+
+pickup penoffsquare xscaled (.8thin) yscaled (1.4thick) rotated (pen_rot+90);
+  mpen225 := savepen;
+
+pickup penoffsquare xscaled (.8thin) yscaled (1.4thick) rotated (pen_rot-90);
+  mpen45 := savepen;
+
+def bedraw expr p =
+  picture savedpicture; savedpicture = currentpicture; clearit;
+  pickup main_pen;
+  draw p;
+  cullit;
+  trim (point 0 of p, 180+angle direction 0 of p);
+  trim (point infinity of p, angle direction infinity of p);
+  cullit;
+  addto currentpicture also savedpicture
+enddef;
+
+vardef trim (expr z, theta) =
+    if (theta <= 0) : alpha := (theta + 360) ;
+    else : alpha := theta;
+    fi
+    if ((alpha < 120) or (alpha > 330)) : pickup mpen45;
+    elseif ((alpha >= 120) and (alpha <= 150)) : pickup mpen135;
+    elseif ((alpha >= 300) and (alpha <= 330)) : pickup mpen315;
+    else : pickup mpen225;
+    fi
+  undrawdot z;
+enddef;
+
+def putdot expr z =
+  pickup squarepen; drawdot z;
+enddef;
+
+def H  := ht/12 enddef;
+def W  := H     enddef; % used to be wd/12, but because angles used in
+                        % defining pen movements would also need to change
+                        % with aspect ratio, it is simpler to work with a
+                        % fixed grid and then use TRANSFORMATION to scale
+                        % the x-axis.
+
+currenttransform:=identity xscaled (wd#/ht#);
+
+beginchar("?",16/12wd#,.5penht#+16/12ht#,.5penht#); "OM";
+  bedraw (2W,10.5H)..{dir0}(5W,12H)..{dir225}(7W,7H)..(5W,6H);
+  bedraw (7W,7H)--(8W,6H){dir315}..{dir180}(6W,0)..{dir135}(2W,2H)--(0W,4H);
+  bedraw (7W,7H){dir315}..(11W,6H)..{dir0}(13.5W,7.5H)..{dir270}(16W,5H);
+    bedraw (16W,5H){dir270}..{dir180}(13.5W,2.5H)..{dir135}(11W,4H);
+  bedraw (8W,14H){dir315}..{dir45}(16W,14H);
+  putdot (12W,16H);
+endchar;
+end;
