@@ -1,0 +1,11 @@
+mode_setup;
+% TODO: find out what changes are caused by "font_size 10pt#;" (use tftopl)
+beginchar("?",10pt#,10pt#,0);
+pickup pencircle scaled .1pt;
+path p; p = (0,h)..(w,0)..(0,-h);
+fill p{dir(157)}..(0,0){dir(23)}..{dir(157)}cycle;
+draw p..(-w,0)..cycle;
+unfill (0,-0.6h)..(0.1w,-0.5h)..(0,-0.4h)..(-0.1w,-0.5h)..cycle; % white dot
+fill   (0, 0.6h)..(0.1w, 0.5h)..(0, 0.4h)..(-0.1w, 0.5h)..cycle; % black dot
+endchar;
+end
