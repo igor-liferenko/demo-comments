@@ -1,8 +1,8 @@
 mode_setup;
+font_size=10pt#;
 design_size := 2.032;
 cap# := design_size*1mm#;
 
-font_size 10pt#;
 pen_scale := 7.6;
 pen_ratio := 1;
 pen_rot := 135;

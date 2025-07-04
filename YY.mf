@@ -1,4 +1,5 @@
 mode_setup;
+font_size=10pt#;
 beginchar("?",10pt#,10pt#,0);
 pickup pencircle scaled .1pt;
 path p; p = (0,h)..(w,0)..(0,-h);
