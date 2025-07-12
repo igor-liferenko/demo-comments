@@ -1,47 +1,40 @@
 mode_setup;
 font_size=10pt#;
-design_size := 2.032;
-cap# := design_size*1mm#;
 
-pen_scale := 7.6;
-pen_ratio := 1;
-pen_rot := 135;
-charwd_scale := 1;
+ht# := 2.032mm#;
+wd# := ht#;
+penht# := ht#/7.6;
+penwd# := penht#;
+thin_weight := 2;                          % factor to increase thin pen stroke
+thin# := (penwd#/6.5cosd(45))*thin_weight; % pen stroke width at 135-deg
+thick# := (6.25thin#)/thin_weight;         % pen stroke width at 45-deg
 
-thin_weight := 2;                % factor to increase thin pen stroke
-penwd# := cap#/pen_scale;          % width of horizontal or vertical pen stroke
-penht# := penwd#;                  % ht = wd, at this stage anyway!
-thin# := (penwd#/6.5cosd(45))*thin_weight;   % pen stroke width at 135-deg
-thick# := (pen_ratio*6.25thin#)/thin_weight; % pen stroke width at 45-deg
-ht# := cap#;                       % character height at horizontal line
-wd# := charwd_scale*ht#;           % character width - nominal reference
-
-define_pixels(penwd,penht,wd);
 define_whole_pixels(ht);
+define_pixels(wd,penht,penwd);
 define_blacker_pixels(thin,thick);
+
 smoothing := 0;
 
-clear_pen_memory;
+pen_rot := 135;
 
 pickup pencircle xscaled thick yscaled thin rotated (pen_rot);
-  main_pen := savepen;
+main_pen := savepen;
 
-capsule_def (squarepen) makepen (unitsquare shifted (-.5,-.5)
-scaled thick rotated 135);
+capsule_def (squarepen) makepen (unitsquare shifted (-.5,-.5) scaled thick rotated 135);
 
 capsule_def (penoffsquare) makepen (unitsquare shifted (0,-.5));
 
 pickup penoffsquare xscaled (.8thick) yscaled (1.4thin) rotated pen_rot;
-  mpen135 := savepen;
+mpen135 := savepen;
 
 pickup penoffsquare xscaled (.8thick) yscaled (1.4thin) rotated (pen_rot-180);
-  mpen315 := savepen;
+mpen315 := savepen;
 
 pickup penoffsquare xscaled (.8thin) yscaled (1.4thick) rotated (pen_rot+90);
-  mpen225 := savepen;
+mpen225 := savepen;
 
 pickup penoffsquare xscaled (.8thin) yscaled (1.4thick) rotated (pen_rot-90);
-  mpen45 := savepen;
+mpen45 := savepen;
 
 def bedraw expr p =
   picture savedpicture; savedpicture = currentpicture; clearit;
@@ -83,7 +76,7 @@ beginchar("?",16/12wd#,.5penht#+16/12ht#,.5penht#); "OM";
   bedraw (2W,10.5H)..{dir0}(5W,12H)..{dir225}(7W,7H)..(5W,6H);
   bedraw (7W,7H)--(8W,6H){dir315}..{dir180}(6W,0)..{dir135}(2W,2H)--(0W,4H);
   bedraw (7W,7H){dir315}..(11W,6H)..{dir0}(13.5W,7.5H)..{dir270}(16W,5H);
-    bedraw (16W,5H){dir270}..{dir180}(13.5W,2.5H)..{dir135}(11W,4H);
+  bedraw (16W,5H){dir270}..{dir180}(13.5W,2.5H)..{dir135}(11W,4H);
   bedraw (8W,14H){dir315}..{dir45}(16W,14H);
   putdot (12W,16H);
 endchar;
