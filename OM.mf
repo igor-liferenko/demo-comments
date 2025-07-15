@@ -48,7 +48,7 @@ def bedraw expr p =
 enddef;
 
 vardef trim (expr z, theta) =
-    if (theta <= 0) : alpha := (theta + 360) ;
+    if (theta <= 0) : alpha := (theta + 360);
     else : alpha := theta;
     fi
     if ((alpha < 120) or (alpha > 330)) : pickup mpen45;
@@ -59,18 +59,8 @@ vardef trim (expr z, theta) =
   undrawdot z;
 enddef;
 
-def putdot expr z =
-  pickup squarepen; drawdot z;
-enddef;
-
 def H  := ht/12 enddef;
-def W  := H     enddef; % used to be wd/12, but because angles used in
-                        % defining pen movements would also need to change
-                        % with aspect ratio, it is simpler to work with a
-                        % fixed grid and then use TRANSFORMATION to scale
-                        % the x-axis.
-
-currenttransform:=identity xscaled (wd#/ht#);
+def W  := H     enddef;
 
 beginchar("?",16/12wd#,.5penht#+16/12ht#,.5penht#); "OM";
   bedraw (2W,10.5H)..{dir0}(5W,12H)..{dir225}(7W,7H)..(5W,6H);
@@ -78,6 +68,6 @@ beginchar("?",16/12wd#,.5penht#+16/12ht#,.5penht#); "OM";
   bedraw (7W,7H){dir315}..(11W,6H)..{dir0}(13.5W,7.5H)..{dir270}(16W,5H);
   bedraw (16W,5H){dir270}..{dir180}(13.5W,2.5H)..{dir135}(11W,4H);
   bedraw (8W,14H){dir315}..{dir45}(16W,14H);
-  putdot (12W,16H);
+  pickup squarepen; drawdot(12W,16H);
 endchar;
 end;
