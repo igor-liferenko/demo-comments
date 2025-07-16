@@ -1,9 +1,9 @@
 mode_setup;
 font_size=10pt#;
 
-ht# := 2.032mm#;
+ht# := 7.7pt#;
 wd# := ht#;
-penht# := ht#/7.6;
+penht# := ht#/10;
 penwd# := penht#;
 thin_weight := 2;                          % factor to increase thin pen stroke
 thin# := (penwd#/6.5cosd(45))*thin_weight; % pen stroke width at 135-deg
@@ -59,15 +59,12 @@ vardef trim (expr z, theta) =
   undrawdot z;
 enddef;
 
-def H  := ht/12 enddef;
-def W  := H     enddef;
-
-beginchar("?",16/12wd#,.5penht#+16/12ht#,.5penht#); "OM";
-  bedraw (2W,10.5H)..{dir0}(5W,12H)..{dir225}(7W,7H)..(5W,6H);
-  bedraw (7W,7H)--(8W,6H){dir315}..{dir180}(6W,0)..{dir135}(2W,2H)--(0W,4H);
-  bedraw (7W,7H){dir315}..(11W,6H)..{dir0}(13.5W,7.5H)..{dir270}(16W,5H);
-  bedraw (16W,5H){dir270}..{dir180}(13.5W,2.5H)..{dir135}(11W,4H);
-  bedraw (8W,14H){dir315}..{dir45}(16W,14H);
-  pickup squarepen; drawdot(12W,16H);
+beginchar("?",wd#,.5penht#+ht#,.5penht#);
+  bedraw (1/8wd,21/32ht)..{dir0}(5/16wd,3/4ht)..{dir225}(7/16wd,7/16ht)..(5/16wd,3/8ht);
+  bedraw (7/16wd,7/16ht)--(1/2wd,3/8ht){dir315}..{dir180}(3/8wd,0)..{dir135}(1/8wd,1/8ht)--(0,1/4ht);
+  bedraw (7/16wd,7/16ht){dir315}..(11/16wd,3/8ht)..{dir0}(27/32wd,15/32ht)..{dir270}(wd,5/16ht);
+  bedraw (wd,5/16ht){dir270}..{dir180}(27/32wd,5/32ht)..{dir135}(11/16wd,1/4ht);
+  bedraw (1/2wd,7/8ht){dir315}..{dir45}(wd,7/8ht);
+  pickup squarepen; drawdot(3/4wd,ht);
 endchar;
 end;
