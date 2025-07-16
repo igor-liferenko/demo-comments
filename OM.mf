@@ -56,7 +56,7 @@ vardef trim (expr z, theta) =
     elseif ((alpha >= 300) and (alpha <= 330)) : pickup mpen315;
     else : pickup mpen225;
     fi
-  undrawdot z;
+  undrawdot z; % drawdot z;
 enddef;
 
 beginchar("?",wd#,.5penht#+ht#,.5penht#);
