@@ -12,7 +12,7 @@
 \shcrop=0pt
 \shfootline={}
 \shthickness=.27mm
-\quire{108}
+\quire{16}
 
 \horigin=9mm
 \hsize=\htotal \advance\hsize by-2\horigin
@@ -29,6 +29,8 @@
 \font\speakerF=omssbx10
 \def\A{\item{\speakerF А.}}
 \def\T{\item{\speakerF У.}}
+\setbox0=\hbox{\speakerF А.\enskip}
+\parindent=\wd0
 
 \A
 Почему именно 100 дней практики? Откуда это пошло?
@@ -422,4 +424,6 @@
 Я не говорю, что этого нет, есть, и найти можно, но очень сложно. Как говорил Мастер Ян Фанши, найти боевое тайцзи,
 настоящее тайцзи в современном Китае, это десятый год, очень трудно. Можно, но очень сложно.
 
+\vfil\eject
+\shipout\vbox{}
 \bye
