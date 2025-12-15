@@ -118,11 +118,12 @@
 \def\columnbox{\leftline{\pagebody}}
 
 \parindent=0pt
-\def\undertext#1{$\underline{\hbox{#1}}$} % FIXME: check \m@th
-\long\def\title#1 #2\par{\noindent{\bf#1} \undertext{\strut#2} \medskip}
-\long\def\titleX#1 #2\par{\noindent\def\«{#1}\def\»{#2}\futurelet\next\weekend}
-\def\weekend{\if\next[{\bf\«} \boxit{\»}\let\next=\doweekend\else\boxit{\« \»}\let\next=\medskip\fi\next}
-\def\doweekend[#1]{\enspace$^{#1}$\medskip}
+\catcode`\@=11
+\def\understrut#1{$\setbox0=\hbox{#1} \dp0=\dp\strutbox \m@th \underline{\box0}$}
+\catcode`\@=12
+\long\def\title#1 #2\par{\noindent{\bf#1} \understrut{#2} \medskip}
+\long\def\titleX#1\par{\noindent\boxit{#1}\medskip}
+%TODO: check that \boxit puts bottom line at the same level as \understrut
 %\def\boxit{\rlap{\kern-3pt\vbox to0pt{\vss
 %  \hrule\kern-.4pt\hbox{\vrule height11pt\kern10pt\vrule}\kern-.4pt\hrule\kern-2pt}}}
 \def\boxit#1{\vbox{\hrule\kern-.4pt\kern\ht\strutbox\kern\dp\strutbox\kern-.4pt\hrule
