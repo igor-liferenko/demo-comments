@@ -119,9 +119,9 @@
 
 \parindent=0pt
 \long\def\title#1 #2\par{\noindent{\bf#1} $\underline{\strut\hbox{#2}}$ \medskip}
-\long\def\titleX#1 #2\par{\noindent{\bf#1} \boxit{#2}\futurelet\next\weekend}
-\def\weekend{\if\next[\doweekend\fi\medskip}
-\def\doweekend[#1]{\enspace$^{#1}$}
+\long\def\titleX#1 #2\par{\def\«{#1}\def\»{#2}\futurelet\next\weekend}
+\def\weekend{\noindent\if\next[{\bf\«} \boxit{\»}\let\next=\doweekend\else\boxit{\« \»}\let\next=\medskip\fi\next}
+\def\doweekend[#1]{\enspace$^{#1}$\medskip}
 %\def\boxit{\rlap{\kern-3pt\vbox to0pt{\vss
 %  \hrule\kern-.4pt\hbox{\vrule height11pt\kern10pt\vrule}\kern-.4pt\hrule\kern-2pt}}}
 \def\boxit#1{\vbox{\hrule\kern-.4pt\kern\ht\strutbox\kern\dp\strutbox\kern-.4pt\hrule
@@ -730,8 +730,7 @@
 
 \bigskip
 
-{\bf ТЕОРИЯ}
-\medskip
+\titleX НЕДЕЛЯ 11
 
 Итак, друзья, всем привет. Мы начинаем
 одиннадцатую неделю нашего марафона.
@@ -1069,8 +1068,7 @@
 
 \bigskip
 
-{\bf ТЕОРИЯ}
-\medskip
+\titleX НЕДЕЛЯ 14
 
 Завершающую неделю марафона мы посвятим комплексной системе развития тела и сознания. В Китае она называется
 «метод спиральных усилий»
