@@ -10,11 +10,11 @@ cover.eps: cover.jpg
 	@convert $< $@
 сурья-01.eps: сурья-01.jpg
 	@convert $< $@
-сурья-02.eps: сурья-02.jpg
+сурья-02-11.eps: сурья-02-11.jpg
 	@convert $< $@
-сурья-03.eps: сурья-03.jpg
+сурья-03-10.eps: сурья-03-10.jpg
 	@convert $< $@
-сурья-04.eps: сурья-04.jpg
+сурья-04-09.eps: сурья-04-09.jpg
 	@convert $< $@
 сурья-05.eps: сурья-05.jpg
 	@convert $< $@
@@ -23,12 +23,6 @@ cover.eps: cover.jpg
 сурья-07.eps: сурья-07.jpg
 	@convert $< $@
 сурья-08.eps: сурья-08.jpg
-	@convert $< $@
-сурья-09.eps: сурья-09.jpg
-	@convert $< $@
-сурья-10.eps: сурья-10.jpg
-	@convert $< $@
-сурья-11.eps: сурья-11.jpg
 	@convert $< $@
 сурья-12.eps: сурья-12.jpg
 	@convert $< $@
