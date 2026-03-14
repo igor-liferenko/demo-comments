@@ -6,8 +6,6 @@ eps:
 
 .PHONY: $(wildcard *.eps)
 
-cover.eps: cover.jpg
-	@convert $< $@
 сурья-01.eps: сурья-01.jpg
 	@convert $< $@
 сурья-02-11.eps: сурья-02-11.jpg
