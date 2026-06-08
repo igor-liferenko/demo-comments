@@ -22,5 +22,3 @@ eps:
 	@convert $< $@
 сурья-08.eps: сурья-08.jpg
 	@convert $< $@
-сурья-12.eps: сурья-12.jpg
-	@convert $< $@
